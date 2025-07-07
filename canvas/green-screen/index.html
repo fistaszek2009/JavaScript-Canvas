@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green-screen effect</title>
+    <script src="proccesor.js" defer></script>
+    <style>
+        body{
+            background-color: black;
+            color:#cccccc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        #c2{background-image: url(img/background/1.jpg);background-repeat: no-repeat;background-position: center;background-size: cover;}
+         div {
+            float: left;
+            border: 1px solid #444444;
+            padding: 10px;
+            margin: 10px;
+            background: #3b3b3b;
+            border-radius: 1.5rem;
+        }
+        video,canvas,nav{border-radius: 1rem;}
+        nav{background-color: #cccccc;color:black; padding:1em;position:fixed;top:1em;right:1em;}
+    </style>
+</head>
+<body>
+    <div>
+        <video
+        id="video"
+        src="img/video.mp4"
+        crossorigin="anonymous"
+        controls autoplay loop
+        width="960"></video>
+    </div>
+    <div>
+        <canvas id="c1" width="430" height="270"></canvas>
+        <canvas id="c2" width="430" height="270"></canvas>
+    </div>
+    <nav>
+        <label for="image">Choose background:</label>
+        <select id="image" name="image">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </nav>
+</body>
+</html>

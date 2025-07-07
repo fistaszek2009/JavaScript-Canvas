@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <link rel="icon" type="image/x-icon" href="clock-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manufacturing+Consent&display=swap" rel="stylesheet">
+    <script src="clock.js" defer></script>
+    <style>
+        *{padding: 0;margin: 0;box-sizing: border-box;}
+        body{overflow: hidden;
+            font-family: "Manufacturing Consent", system-ui;
+              font-weight: 400;
+            font-style: normal;
+        }
+        canvas {
+        z-index: 0;
+        }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 250px;
+      background: rgba(25, 25, 77, 0.6);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 6em 2em 1em;
+      font-size: 0.9em;
+      transform: translateX(100%);
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      opacity: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+    }
+
+    nav.active {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    nav label {
+      margin-top: 1em;
+      margin-bottom: 0.5em;
+      display: block;
+      font-weight: 500;
+      & i{padding-left:0.2em}
+    }
+
+    nav input[type="range"] {
+      width: 100%;
+      margin-bottom: 1em;
+      accent-color: #00ffc8;
+      cursor: pointer;
+    }
+
+    .openbtn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      font-size: 1.2em;
+      cursor: pointer;
+      color: black;
+      background-color: transparent;
+      padding: 0.5em 0.7em;
+      border: none;
+      border-radius: 50%;
+      backdrop-filter: blur(5px);
+      z-index: 20;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .openbtn:hover {
+      background-color: rgba(221, 221, 221, 0.1);
+      transform: scale(1.1);
+    }
+
+    .openbtn.active::before {
+      content: '✖';
+    }
+
+    .openbtn::before {
+      content: '☰';
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        width: 30%;
+      }
+    }
+
+    nav button{
+      margin-top:1.5em;
+      font-family: inherit;
+      font-size: 1.5em;
+      background-color: #00ffc8;
+      border:2px solid #00ffc8;
+      color:black;
+      padding:0.5em 0.75em;
+      border-radius:25px;
+      box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+      transition: 0.6s;
+      &:hover{background-color: transparent;color:white}
+      &:active{transform: scale(0.9);}
+    }
+  </style>
+</head>
+<body>
+    <canvas id="canvas">The current time</canvas>
+    <button class="openbtn" onclick="toggleNav()"></button>
+  <nav id="mySidebar">
+    
+    <label for="scale">Scale:<i></i></label>
+    <input oninput="changeScale()" id="scale" type="range" min="0.1" max="5" step="0.1" value="1">
+    <label for="speed">Speed:<i></i></label>
+    <input oninput="changeSpeed()" id="speed" type="range" min="-10" max="10" step="1" value="1">
+    <button onclick="reset()">Reset time</button>
+    
+  </nav>
+
+  <script>
+    const sidebar = document.getElementById("mySidebar");
+    const openbtn = document.querySelector(".openbtn");
+
+    function toggleNav() {
+      sidebar.classList.toggle("active");
+      openbtn.classList.toggle("active");
+    }
+  </script>
+</body>
+</html>
