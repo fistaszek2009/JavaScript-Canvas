@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canvas Projects Launcher</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body { 
+        font-family: Arial, sans-serif; 
+        background-color: #222; 
+        color: white;
+        height: 100vh;
+        overflow: hidden;
+    }
+    
+    h1 { 
+        margin: 20px;
+        font-size: 24px;
+    }
+    
+    main {
+        display: grid;
+        grid-template-columns: 15% 1fr;
+        height:100%;
+        min-height:100vh;
+    }
+    
+    #menu { 
+        display: flex; 
+        flex-wrap: wrap; 
+        flex-direction: column; 
+        gap: 10px; 
+        justify-content: flex-start; 
+        padding: 0 20px;
+        overflow-y: auto;
+    }
+    
+    .project-btn {
+        padding: 10px 20px;
+        background: #fff; 
+        color: #444;
+        border: none; 
+        border-radius: 8px;
+        cursor: pointer; 
+        font-size: 16px;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+    
+    .project-btn:hover { 
+        background: #eee; 
+        transform: translateY(-1px);
+    }
+    
+    #viewer-container {
+        position: relative;
+        height: 100%;
+        display: none;
+    }
+    
+    #viewer {
+        width: 100%; 
+        height: 100%;
+        border: none;
+        background-color: #fff;
+    }
+
+    #fullscreen-btn {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        background: #333;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: bold;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+    
+    #fullscreen-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        background: #444;
+    }
+    
+    #fullscreen-btn:active {
+        transform: scale(0.95);
+    }
+
+    .fullView {
+        overflow: hidden;
+    }
+
+    .fullView main {
+        height: 100vh !important;
+        grid-template-columns: 1fr !important;
+    }
+
+    .fullView nav {
+        display: none;
+    }
+
+    .fullView #viewer-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 999;
+        display: block !important;
+    }
+
+    .fullView #viewer {
+        width: 100%;
+        height: 100%;
+    }
+
+    @media screen and (max-width: 800px) {
+        main {
+            display: flex !important;
+            flex-direction: column;
+        }
+        
+        #menu {
+            flex-direction: row !important;
+            padding: 10px 20px;
+            gap: 8px;
+            overflow-x: auto;
+            flex-shrink: 0;
+        }
+        
+        .project-btn {
+            flex-shrink: 0;
+            font-size: 14px;
+            padding: 8px 16px;
+        }
+
+        #viewer-container {
+            flex: 1;
+            min-height: 0;
+        }
+    }
+
+    /* Scrollbar styling */
+    #menu::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    #menu::-webkit-scrollbar-track {
+        background: #333;
+        border-radius: 3px;
+    }
+
+    #menu::-webkit-scrollbar-thumb {
+        background: #666;
+        border-radius: 3px;
+    }
+
+    #menu::-webkit-scrollbar-thumb:hover {
+        background: #888;
+    }
+
+</style>
+</head>
+<body>
+
+
+<main>
+    <nav>
+        <h1>My Canvas Projects</h1>
+        <div id="menu"></div>
+    </nav>
+    <div id="viewer-container">
+        <iframe id="viewer"></iframe>
+        <button id="fullscreen-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">⛶</button>
+    </div>
+</main>
+
+<script>
+    const projects = [
+        { name: "Ball animations", path: "ball-animation" },
+        { name: "Clock", path: "clock" },
+        { name: "Green screen", path: "green-screen" },
+        { name: "Looping panorama", path: "looping-panorama" },
+        { name: "Mouse circle", path: "mouse-circle" },
+        { name: "Pixel manipulation", path: "pixel-manipulation" },
+        { name: "Solar system", path: "solar-system" },
+        { name: "Water dams", path: "water-dam" },
+    ];
+
+    const menu = document.getElementById("menu");
+    const viewer = document.getElementById("viewer");
+    const viewerContainer = document.getElementById("viewer-container");
+    const fullscreenBtn = document.getElementById("fullscreen-btn");
+
+    let isFullscreen = false;
+
+    // Tworzenie przycisków projektów
+    projects.forEach(proj => {
+        const btn = document.createElement("button");
+        btn.className = "project-btn";
+        btn.textContent = proj.name;
+        btn.onclick = () => {
+            viewer.src = proj.path + "/index.html";
+            viewerContainer.style.display = "block";
+            if (isFullscreen) {
+                exitFullscreen();
+            }
+        };
+        menu.appendChild(btn);
+    });
+
+    function toggleFullscreen() {
+        if (isFullscreen) {
+            exitFullscreen();
+        } else {
+            enterFullscreen();
+        }
+    }
+
+    function enterFullscreen() {
+        document.body.classList.add('fullView');
+        fullscreenBtn.innerHTML = '⛉';
+        fullscreenBtn.title = 'Exit Fullscreen';
+        isFullscreen = true;
+    }
+
+    function exitFullscreen() {
+        document.body.classList.remove('fullView');
+        fullscreenBtn.innerHTML = '⛶';
+        fullscreenBtn.title = 'Toggle Fullscreen';
+        isFullscreen = false;
+    }
+
+    // Obsługa klawiatury (ESC dla wyjścia z fullscreen)
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isFullscreen) {
+            exitFullscreen();
+        }
+    });
+
+</script>
+
+</body>
+</html>

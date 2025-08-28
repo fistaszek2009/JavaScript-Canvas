@@ -5,8 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ball in the box</title>
     <script src="script.js" defer></script>
+    <style>
+        nav{
+            position: fixed;
+            top:0;
+            right:0;
+            background-color: rgb(206, 144, 144);
+            padding:0.5em 0.75em;
+        }
+    </style>
 </head>
 <body>
     <canvas id="canvas"></canvas>
+    <nav>
+        <input id="drawing" type="checkbox">
+        <label for="drawing">draw</label><br>
+        <input id="physics" type="checkbox">
+        <label for="physics">physics</label><br>
+        <input id="shadow" type="checkbox">
+        <label for="shadow">shadow</label>
+    </nav>
 </body>
 </html>

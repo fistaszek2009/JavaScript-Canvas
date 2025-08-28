@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tama wodna</title>
+    <style>
+*{padding:0;margin:0;box-sizing: border-box;}
+
+:root{
+  --thumb-color:rgb(54, 54, 96);
+  --trail-color:rgb(141, 141, 171);
+}
+
+body{
+    background-color: rgb(30,30,30);
+    color:white;
+    min-height:100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    display: flex;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+}
+
+.content{
+    width:100%;
+    background-color: rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+}
+
+nav{
+    border:none !important;
+    padding:0.75em 1em;
+    border-radius: 0 !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    & h1{margin:0; font-size: 1.5em;}
+  }
+
+main{
+    flex:1;
+    padding:1em;
+    display: flex;
+    gap:1em;
+    min-height: 0;
+}
+
+aside{
+    flex: 0 0 280px;
+    display: flex;
+    flex-direction: column;
+    padding:1em;
+    border-radius:15px;
+    gap:1em;
+    min-height: 0;
+}
+
+section {
+  padding:1em;
+  flex:1;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 0;
+  min-width: 0;
+}
+
+.menuInput{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding:0.5em 0.75em;
+  gap:0.5em;
+  border-radius:10px;
+  border:1px solid beige;
+}
+
+.menuSection{
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap:1em;
+  & label{font-weight: bold;font-size: 1.1em;}
+  & p{text-decoration: underline;}
+  & p:after{content:'%'}
+  & label[for=float]+p::after{content:' m³/s'}
+}
+
+.glass{
+    background: rgba(218, 197, 197, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2.5px);
+    -webkit-backdrop-filter: blur(2.5px);
+    border: 1px solid rgba(233, 209, 209, 1);
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background-color: var(--trail-color);
+  box-shadow:inset 0 0 2px 0 rgba(255,255,255,0.8);
+  border-radius: 0.5rem;
+  height: 0.4rem;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -7.999999999999999px;
+  background-color: var(--thumb-color);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 2px 2px, rgba(204, 219, 232,0.4) -0.5px -0.5px 4px 1px inset, rgba(255, 255, 255, 0.5) 1px 1px 4px 0px inset;
+  border: 0.5px solid rgba(227, 227, 197,0.7);
+  border-radius: 0.2rem;
+  height: 1rem;
+  width: 1.2rem;
+  transition: 0.4s;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+  transform:scale(0.9)
+}
+
+input[type="range"]::-moz-range-track {
+  background-color: var(--trail-color);
+  box-shadow:inset 0 0 2px 0 rgba(255,255,255,0.8);
+  border-radius: 0.5rem;
+  height: 0.4rem;
+}
+
+input[type="range"]::-moz-range-thumb {
+  background-color: var(--thumb-color);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 2px 2px, rgba(204, 219, 232,0.4) -0.5px -0.5px 4px 1px inset, rgba(255, 255, 255, 0.5) 1px 1px 4px 0px inset;
+  border: 0.5px solid rgba(227, 227, 197,0.7);
+  border-radius: 0.2rem;
+  height: 1rem;
+  width: 1.2rem;
+  transition: 0.4s;
+}
+
+input[type="range"]:focus::-moz-range-thumb{
+  transform:scale(0.9);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 2px 2px,
+    rgba(204, 219, 232,0.4) -0.5px -0.5px 4px 1px inset,
+    rgba(255, 255, 255, 0.5) 1px 1px 4px 0px inset,
+    rgb(255, 32, 69) 0 0 12px 0;
+}
+
+@media screen and (max-width: 768px){
+    .content{
+        padding: 0.5em;
+    }
+    .content main{
+        flex-direction: column;
+        padding: 0.5em;
+        gap: 0.5em;
+    }
+    aside{
+        flex: none;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 0.75em;
+        gap: 1em;
+    }
+    .menuInput{
+        min-width: 200px;
+        flex-shrink: 0;
+    }
+    section{
+        height: 50vh;
+        min-height: 300px;
+    }
+    nav h1{
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (max-width: 480px){
+    .menuSection label{
+        font-size: 0.9em;
+    }
+    .menuInput{
+        min-width: 180px;
+        padding: 0.4em;
+    }
+}
+    </style>
+</head>
+<body>
+  <div class="content">
+      <nav class="glass">
+        <h1>Tama wodna</h1>
+    </nav>
+    <main>
+        <aside class="glass">
+            <div class="menuInput">
+                <div class='menuSection'>
+                    <label for="damAFlow">Tama wpływająca - A</label>
+                    <p>50%</p>
+                </div>
+                <input type="range" id="damAFlow" min="0" max="100" step="1" value="50">
+            </div>
+            <div class="menuInput">
+               <div class='menuSection'>
+                    <label for="damBFlow">Tama wypływająca - B</label>
+                    <p>50%</p>
+                </div>
+                <input type="range" id="damBFlow" min="0" max="100" step="1" value="50">
+            </div>
+            <div class="menuInput">
+              <div class='menuSection'>
+                    <label for="float">Przepływ wody</label>
+                    <p>12</p>
+                </div>
+                <input type="range" id="float" min="0" max="25" step="1" value="12">
+            </div>
+        </aside>
+        <section class="glass" id="stage">
+            <canvas width="600" height="327.5">Symulacja tamy</canvas>
+        </section>
+    </main>
+  </div>
+
+  <script>
+const $ = (sel)=>document.querySelector(sel)
+const $$ = (sel)=>[...document.querySelectorAll(sel)]
+
+const inputs = $$('.menuInput input[type=range]')
+const canvas = $('canvas')
+const ctx = canvas.getContext('2d')
+const canvasContainer = $('main section')
+
+let lastTime = performance.now()
+
+// Parametry zbiorników (poziomy wody w jednostkach fizycznych)
+let H_up   = 0.50   // zbiornik przed tamą A
+let H_mid  = 0.30   // zbiornik między tamami  
+let H_down = 0.15   // zbiornik za tamą B
+
+// Parametry hydrauliczne
+const HYDRO = {
+  // Pojemności zbiorników (zwiększone dla szybszych zmian)
+  capacityUp: 1.2,
+  capacityMid: 0.9, 
+  capacityDown: 1.1,
+  
+  // Współczynniki przepływu przez tamy (zwiększone)
+  kA: 1.2,  // przepustowość tamy A
+  kB: 1.2,  // przepustowość tamy B
+  
+  // Naturalne odpływy (zwiększone)
+  upLeakage: 0.03,    // minimalne przeciekanie z górnego zbiornika
+  downDrain: 0.6,     // odpływ z dolnego zbiornika do rzeki
+  
+  // Grawitacyjny odpływ gdy tama B zamknięta
+  gravityDrain: 0.5,
+  
+  // Ograniczenia poziomów
+  minLevel: 0.05,     // minimalne poziomy (dno)
+  maxLevel: 0.95,     // maksymalne poziomy (brzeg/traw)
+}
+
+const clamp = (min, max, val) => Math.max(min, Math.min(max, val))
+const lerp = (a, b, t) => a + (b - a) * t
+
+const simulation = {
+  damAFlow: 50,
+  damBFlow: 50, 
+  float: 12,
+  
+  draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    this.drawBackground()
+    this.updatePhysics()
+    this.drawWater()
+    this.drawDams()
+  },
+  
+  drawBackground() {
+    // Niebo
+    const skyGrad = ctx.createLinearGradient(0, 0, 0, canvas.height/3)
+    skyGrad.addColorStop(0, '#87CEEB')
+    skyGrad.addColorStop(1, '#4682B4')
+    ctx.fillStyle = skyGrad
+    ctx.fillRect(0, 0, canvas.width, canvas.height/3)
+    
+    // Trawnik (górna granica wody)
+    ctx.fillStyle = '#228B22'
+    ctx.fillRect(0, canvas.height/3, canvas.width, 8)
+    
+    // Ziemia
+    const earthGrad = ctx.createLinearGradient(0, canvas.height/3 + 8, 0, canvas.height)
+    earthGrad.addColorStop(0, '#8B4513')
+    earthGrad.addColorStop(0.6, '#654321')
+    earthGrad.addColorStop(1, '#3F1E08')
+    ctx.fillStyle = earthGrad
+    ctx.fillRect(0, canvas.height/3 + 8, canvas.width, canvas.height)
+    
+    // Dno rzeki (dolna granica wody)
+    ctx.fillStyle = '#2F1B0C'
+    ctx.fillRect(0, canvas.height * 0.83, canvas.width, canvas.height * 0.17)
+  },
+  
+  updatePhysics() {
+    const t = performance.now()
+    const dt = Math.min((t - lastTime) / 1000, 1/30) // ograniczenie dt dla stabilności
+    lastTime = t
+    
+    // Parametry sterowania (zwiększony wpływ przepływu)
+    const inflow = this.float / 25 * 0.8        // dopływ do górnego zbiornika (zwiększone)
+    const openA = this.damAFlow / 100           // otwarcie tamy A (0-1)
+    const openB = this.damBFlow / 100           // otwarcie tamy B (0-1)
+    
+    // === ZBIORNIK GÓRNY (przed tamą A) ===
+    let dH_up = inflow / HYDRO.capacityUp      // dopływ z rzeki
+    dH_up -= HYDRO.upLeakage / HYDRO.capacityUp // minimalne przeciekanie
+    
+    // Przepływ przez tamę A (Torricelli: Q ∝ √Δh)
+    const deltaHA = Math.max(0, H_up - H_mid)
+    const flowA = HYDRO.kA * openA * Math.sqrt(deltaHA + 0.01) * deltaHA
+    dH_up -= flowA / HYDRO.capacityUp
+    
+    H_up += dH_up * dt
+    H_up = clamp(HYDRO.minLevel, HYDRO.maxLevel, H_up)
+    
+    // === ZBIORNIK ŚRODKOWY (między tamami) ===
+    let dH_mid = flowA / HYDRO.capacityMid     // wpływ z tamy A
+    
+    // Przepływ przez tamę B
+    const deltaHB = Math.max(0, H_mid - H_down)
+    const flowB = HYDRO.kB * openB * Math.sqrt(deltaHB + 0.01) * deltaHB
+    dH_mid -= flowB / HYDRO.capacityMid
+    
+    H_mid += dH_mid * dt
+    H_mid = clamp(HYDRO.minLevel, HYDRO.maxLevel, H_mid)
+    
+    // === ZBIORNIK DOLNY (za tamą B) ===
+    let dH_down = flowB / HYDRO.capacityDown   // wpływ z tamy B
+    
+    // Naturalny odpływ do rzeki (zawsze obecny)
+    dH_down -= HYDRO.downDrain * H_down / HYDRO.capacityDown
+    
+    // Dodatkowy odpływ grawitacyjny gdy tama B zamknięta
+    if (openB < 0.1) {
+      dH_down -= HYDRO.gravityDrain * H_down / HYDRO.capacityDown
+    }
+    
+    H_down += dH_down * dt
+    H_down = clamp(HYDRO.minLevel, HYDRO.maxLevel, H_down)
+  },
+  
+  drawWater() {
+    const t = performance.now()
+    
+    // Geometria tam
+    const damWidth = Math.max(canvas.width/15, 25)
+    const damOffset = Math.max(canvas.width/10, 30)
+    
+    // Pozycje tam
+    const damA_x = damOffset
+    const damB_x = canvas.width - damOffset - damWidth
+    
+    // Granice zbiorników
+    const Y_TOP = canvas.height/3 + 8
+    const Y_BOTTOM = canvas.height * 0.83
+    
+    // Konwersja poziomu wody na współrzędną Y
+    const waterY = (level) => lerp(Y_BOTTOM, Y_TOP, clamp(0, 1, level))
+    
+    // Gradient wody
+    const waterGrad = ctx.createLinearGradient(0, Y_TOP, 0, Y_BOTTOM)
+    waterGrad.addColorStop(0, '#4A90E2')
+    waterGrad.addColorStop(0.3, '#2E6BC7') 
+    waterGrad.addColorStop(1, '#1A4480')
+    
+    // Funkcja rysowania zbiornika z falami
+    const drawWaterSection = (x1, x2, level, waveIntensity) => {
+      if (level <= HYDRO.minLevel) return
+      
+      const baseY = waterY(level)
+      const waveAmp = waveIntensity * (2 + level * 3)
+      const waveFreq = 0.03
+      const waveSpeed = t * 0.001
+      
+      ctx.fillStyle = waterGrad
+      ctx.beginPath()
+      
+      // Fala na powierzchni
+      let firstPoint = true
+      for (let x = x1; x <= x2; x += 3) {
+        const wave = Math.sin(x * waveFreq + waveSpeed) * waveAmp
+        const y = clamp(Y_TOP, Y_BOTTOM, baseY + wave)
+        
+        if (firstPoint) {
+          ctx.moveTo(x, y)
+          firstPoint = false
+        } else {
+          ctx.lineTo(x, y)
+        }
+      }
+      
+      // Zamknij kształt
+      ctx.lineTo(x2, Y_BOTTOM)
+      ctx.lineTo(x1, Y_BOTTOM)
+      ctx.closePath()
+      ctx.fill()
+      
+      // Linia powierzchni wody
+      ctx.strokeStyle = 'rgba(200, 220, 255, 0.8)'
+      ctx.lineWidth = 2
+      ctx.beginPath()
+      firstPoint = true
+      for (let x = x1; x <= x2; x += 3) {
+        const wave = Math.sin(x * waveFreq + waveSpeed) * waveAmp
+        const y = clamp(Y_TOP, Y_BOTTOM, baseY + wave)
+        
+        if (firstPoint) {
+          ctx.moveTo(x, y)
+          firstPoint = false
+        } else {
+          ctx.lineTo(x, y)
+        }
+      }
+      ctx.stroke()
+    }
+    
+    // Intensywność fal zależna od przepływu
+    const waveUpIntensity = 1 + this.float/25 * 0.5
+    const waveMidIntensity = 1 + (this.damAFlow/100) * 0.8
+    const waveDownIntensity = 1 + (this.damBFlow/100) * 0.6
+    
+    // Rysuj zbiorniki
+    drawWaterSection(0, damA_x, H_up, waveUpIntensity)
+    drawWaterSection(damA_x + damWidth, damB_x, H_mid, waveMidIntensity) 
+    drawWaterSection(damB_x + damWidth, canvas.width, H_down, waveDownIntensity)
+  },
+  
+  drawDams() {
+    const damWidth = Math.max(canvas.width/15, 25)
+    const damOffset = Math.max(canvas.width/10, 30)
+    
+    const Y_TOP = canvas.height/3 + 8
+    const Y_BOTTOM = canvas.height * 0.83
+    const damHeight = Y_BOTTOM - Y_TOP
+    
+    // Tama A
+    const damA_x = damOffset
+    const openingA = (this.damAFlow/100) * damHeight * 0.8 // 80% max otwarcia dla lepszego efektu
+    
+    // Struktura tamy A
+    const damGradA = ctx.createLinearGradient(damA_x, Y_TOP, damA_x + damWidth, Y_TOP)
+    damGradA.addColorStop(0, '#2C3E50')
+    damGradA.addColorStop(0.5, '#34495E') 
+    damGradA.addColorStop(1, '#2C3E50')
+    ctx.fillStyle = damGradA
+    ctx.fillRect(damA_x, Y_TOP, damWidth, damHeight - openingA)
+    
+    // Metalowy połysk na tamie
+    ctx.fillStyle = 'rgba(255,255,255,0.1)'
+    ctx.fillRect(damA_x + 2, Y_TOP + 2, damWidth - 4, Math.max(damHeight - openingA - 4, 0))
+    
+    // Czerwona linia wskaźnika poziomu tamy A
+    ctx.fillStyle = '#E74C3C'
+    ctx.fillRect(damA_x - 3, Y_BOTTOM - openingA - 2, damWidth + 6, 4)
+    
+    // Efekt przepływu przez tamę A
+    if (openingA > 2) {
+      // Animowany przepływ
+      const flowIntensity = (this.damAFlow/100) * (H_up - H_mid + 0.1)
+      const flowAlpha = 0.3 + flowIntensity * 0.4
+      const flowColor = `rgba(64, 164, 223, ${flowAlpha})`
+      
+      ctx.fillStyle = flowColor
+      ctx.fillRect(damA_x, Y_BOTTOM - openingA, damWidth, openingA)
+      
+      // Efekt turbulencji
+      const t = performance.now() * 0.01
+      for(let i = 0; i < 5; i++) {
+        const bubble_x = damA_x + damWidth/2 + Math.sin(t + i) * damWidth * 0.3
+        const bubble_y = Y_BOTTOM - openingA/2 + Math.cos(t * 1.3 + i) * openingA * 0.3
+        ctx.fillStyle = `rgba(173, 216, 230, ${0.4 + Math.sin(t + i) * 0.3})`
+        ctx.beginPath()
+        ctx.arc(bubble_x, bubble_y, 3 + Math.sin(t + i) * 2, 0, Math.PI * 2)
+        ctx.fill()
+      }
+    }
+    
+    // Status tamy A (tekst)
+    ctx.fillStyle = openingA < 5 ? '#E74C3C' : openingA > damHeight * 0.6 ? '#27AE60' : '#F39C12'
+    ctx.font = 'bold 12px Arial'
+    ctx.textAlign = 'center'
+    const statusA = openingA < 5 ? 'ZAMKNIĘTA' : openingA > damHeight * 0.6 ? 'OTWARTA' : 'CZĘŚCIOWO'
+    ctx.fillText(statusA, damA_x + damWidth/2, Y_TOP - 8)
+    
+    // Tama B
+    const damB_x = canvas.width - damOffset - damWidth
+    const openingB = (this.damBFlow/100) * damHeight * 0.8
+    
+    // Struktura tamy B
+    const damGradB = ctx.createLinearGradient(damB_x, Y_TOP, damB_x + damWidth, Y_TOP)
+    damGradB.addColorStop(0, '#2C3E50')
+    damGradB.addColorStop(0.5, '#34495E')
+    damGradB.addColorStop(1, '#2C3E50')
+    ctx.fillStyle = damGradB
+    ctx.fillRect(damB_x, Y_TOP, damWidth, damHeight - openingB)
+    
+    // Metalowy połysk na tamie B
+    ctx.fillStyle = 'rgba(255,255,255,0.1)'
+    ctx.fillRect(damB_x + 2, Y_TOP + 2, damWidth - 4, Math.max(damHeight - openingB - 4, 0))
+    
+    // Czerwona linia wskaźnika poziomu tamy B
+    ctx.fillStyle = '#E74C3C'
+    ctx.fillRect(damB_x - 3, Y_BOTTOM - openingB - 2, damWidth + 6, 4)
+    
+    // Efekt przepływu przez tamę B
+    if (openingB > 2) {
+      const flowIntensity = (this.damBFlow/100) * (H_mid - H_down + 0.1)
+      const flowAlpha = 0.3 + flowIntensity * 0.4
+      const flowColor = `rgba(64, 164, 223, ${flowAlpha})`
+      
+      ctx.fillStyle = flowColor
+      ctx.fillRect(damB_x, Y_BOTTOM - openingB, damWidth, openingB)
+      
+      // Efekt turbulencji
+      const t = performance.now() * 0.01
+      for(let i = 0; i < 5; i++) {
+        const bubble_x = damB_x + damWidth/2 + Math.sin(t + i + Math.PI) * damWidth * 0.3
+        const bubble_y = Y_BOTTOM - openingB/2 + Math.cos(t * 1.3 + i + Math.PI) * openingB * 0.3
+        ctx.fillStyle = `rgba(173, 216, 230, ${0.4 + Math.sin(t + i) * 0.3})`
+        ctx.beginPath()
+        ctx.arc(bubble_x, bubble_y, 3 + Math.sin(t + i) * 2, 0, Math.PI * 2)
+        ctx.fill()
+      }
+    }
+    
+    // Status tamy B (tekst)
+    ctx.fillStyle = openingB < 5 ? '#E74C3C' : openingB > damHeight * 0.6 ? '#27AE60' : '#F39C12'
+    ctx.font = 'bold 12px Arial'
+    ctx.textAlign = 'center'
+    const statusB = openingB < 5 ? 'ZAMKNIĘTA' : openingB > damHeight * 0.6 ? 'OTWARTA' : 'CZĘŚCIOWO'
+    ctx.fillText(statusB, damB_x + damWidth/2, Y_TOP - 8)
+    
+    // Reset text alignment
+    ctx.textAlign = 'start'
+  }
+}
+
+// Obsługa suwaków
+inputs.forEach(input => {
+  inputChange(input)
+  input.addEventListener('input', () => inputChange(input))
+})
+
+function inputChange(input) {
+  const value = input.value
+  const id = input.getAttribute('id')
+  const outputPlace = $(`label[for=${id}]+p`)
+  
+  if (id === 'float') {
+    outputPlace.innerText = value
+  } else {
+    outputPlace.innerText = value
+  }
+  
+  simulation[id] = parseInt(value)
+}
+
+function resize() {
+  const container = canvas.parentElement
+  const containerRect = container.getBoundingClientRect()
+  const padding = 32
+  
+  const availableWidth = containerRect.width - padding
+  const availableHeight = containerRect.height - padding
+  
+  const aspectRatio = 600 / 327.5
+  
+  let newWidth, newHeight
+  
+  if (availableWidth / availableHeight > aspectRatio) {
+    newHeight = availableHeight
+    newWidth = newHeight * aspectRatio
+  } else {
+    newWidth = availableWidth
+    newHeight = newWidth / aspectRatio
+  }
+  
+  // Upewnij się, że canvas nie jest za mały
+  newWidth = Math.max(newWidth, 300)
+  newHeight = Math.max(newHeight, 180)
+  
+  canvas.style.width = newWidth + 'px'
+  canvas.style.height = newHeight + 'px'
+  
+  // Ustaw rzeczywiste rozmiary canvas dla ostrego renderowania
+  const dpr = Math.min(window.devicePixelRatio || 1, 2)
+  canvas.width = newWidth * dpr
+  canvas.height = newHeight * dpr
+  ctx.scale(dpr, dpr)
+  
+  // Ustaw rozmiar CSS
+  canvas.style.width = newWidth + 'px'
+  canvas.style.height = newHeight + 'px'
+}
+
+new ResizeObserver(resize).observe(canvas.parentElement)
+resize()
+
+function animate() {
+  simulation.draw()
+  requestAnimationFrame(animate)
+}
+
+animate()
+  </script>
+</body>
+</html>
