@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painting pixels</title>
+    <script src="script.js" defer></script>
+    <style>
+      *{margin: 0;padding:0; box-sizing: border-box;}
+      td{border:2px solid;  font-size: 0;overflow: hidden;border-radius: 0.5rem;}
+      body{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height:100vh;
+        background-color: rgb(177, 184, 147);
+        color:rgb(237, 245, 208);
+      }
+      main{
+        background-color: rgb(63 49 27 / 1);
+        padding:1em;
+        border-radius: 1rem;
+      }
+      #canvas{cursor:zoom-in}
+    </style>
+</head>
+<body>
+  <main>
+      <table>
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Smoothing enabled = true</th>
+          <th>Smoothing enabled = false</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <canvas id="canvas" width="400" height="300" oncontextmenu="return false;"></canvas>
+          </td>
+          <td>
+            <canvas id="smoothed" width="300" height="300"></canvas>
+          </td>
+          <td>
+            <canvas id="pixelated" width="300" height="300"></canvas>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>

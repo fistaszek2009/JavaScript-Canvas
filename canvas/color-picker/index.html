@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colors picker</title>
+    <script src="script.js" defer></script>
+    <style>
+      *{margin: 0;padding:0; box-sizing: border-box;}
+      body{display: flex;align-items: center;justify-content: center;min-height:100vh}
+
+      table{
+        max-width:1050px;
+        background-color:#ccc;
+        border-radius: 1rem;
+        padding:1em;
+      }
+      td{border:2px solid black; border-radius: 0.5rem;overflow: hidden;}
+
+      .color-cell{
+        width:320px;
+        color:white;
+        font-family:'Courier New', Courier, monospace ;
+        text-align: center;
+        background-color: black;
+      }
+
+      canvas{cursor:crosshair;display: block;}
+
+      .dark-font{color:black !important;}
+      nav{background-color: #cccccc;color:black; padding:1em;position:fixed;top:1em;right:1em;border-radius: 1rem;}
+    </style>
+</head>
+<body>
+   <nav>
+        <label for="image">Choose image:</label>
+        <select id="image" name="image">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </nav>
+    <table>
+  <thead>
+    <tr>
+      <th>Source</th>
+      <th>Hovered color</th>
+      <th>Selected color</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="canvas-cell"><canvas id="canvas" width="500" height="300"></canvas></td>
+      <td class="color-cell" id="hovered-color">rgb(0 0 0 / 1)</td>
+      <td class="color-cell" id="selected-color">rgb(0 0 0 / 1)</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

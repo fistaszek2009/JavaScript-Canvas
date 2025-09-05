@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painting pixels</title>
+    <script src="script.js" defer></script>
+    <style>
+      *{margin: 0;padding:0; box-sizing: border-box;}
+      body{display: flex;align-items: center;justify-content: center;min-height:100vh}
+
+      main{background-color: #ccc; border-radius: 0.75rem;padding:1em;}
+      .menu{display: flex;justify-content: center; gap: 15px;}
+      
+      nav{background-color: #cccccc;color:black; padding:1em;position:fixed;top:1em;right:1em;border-radius: 1rem;}
+      .image{
+        overflow: hidden;
+        border-radius: 0.5rem;
+        margin-bottom: 15px;
+        font-size: 0;
+      }
+    </style>
+</head>
+<body>
+   <nav>
+        <label for="image">Choose image:</label>
+        <select id="image" name="image">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </nav>
+    
+    <main>
+        <div class="image">
+            <canvas width="600" height="350"></canvas>
+        </div>
+        <form class="menu">
+            <span>
+                <input type="radio" id="original" name="color" value="original" checked>
+                <label for="original">original</label>
+            </span>
+            <span>
+                 <input  type="radio" id="grayscale" name="color" value="grayscale">
+                <label for="grayscale">grayscale</label>
+            </span>
+           <span>
+                 <input type="radio" id="inverted" name="color" value="inverted">
+                <label for="inverted">inverted</label>
+            </span>
+            <span>
+                 <input type="radio" id="sepia" name="color" value="sepia">
+                <label for="sepia">sepia</label>
+            </span>
+        </div>
+    </main>
+</body>
+</html>

@@ -89,6 +89,8 @@ function Particle(x,y,width,color,rotateSpeed,beginRotation,radius){
 function setSize(){
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight;
+  cursor.x = innerWidth/2
+  cursor.y = innerHeight/2;
 }
 
 function run(){
