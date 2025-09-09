@@ -5,7 +5,6 @@ const $$ = (sel) => [...document.querySelectorAll(sel)];
 const canvas = $('#canvas');
 const ctx = canvas.getContext('2d')
 
-let zoomScalee = 20
 
 const smoothed = $('#smoothed');
 const smoothedCtx = smoothed.getContext('2d');
@@ -19,6 +18,8 @@ const img = new Image();
 img.crossOrigin = "anonymous";
 img.src = "../images/z1.jpg";
 img.onload = ()=>{ctx.drawImage(img,0,0,canvas.width,canvas.height)}
+
+let zoomScalee = Math.min(30,Math.floor(Math.min(img.height/3,img.width/3)));
 
 canvas.addEventListener('mousemove',event=>{
   handelEvent(event)
@@ -50,11 +51,14 @@ function zoom(destination,ctx,x,y){
 
 canvas.addEventListener('click',event=>{
   zoomScalee--;
+  if(zoomScalee<=0) zoomScalee = 0;
+  console.log(zoomScalee)
   handelEvent(event);
 })
 
 canvas.addEventListener('contextmenu',event=>{
   zoomScalee++;
+  if(zoomScalee>=img.height/2 || zoomScalee>=img.width/2) zoomScalee = Math.floor(Math.min(img.height/2,img.width/2))
   handelEvent(event);
 })
 
@@ -65,61 +69,3 @@ smoothed.addEventListener('dblclick',_=>{
   a.download = 'zoomed.png';
   a.click();
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//   const zoom = (ctx, x, y) => {
-//     ctx.drawImage(
-//       canvas,
-//       Math.min(Math.max(0, x - 5), img.width - 10),
-//       Math.min(Math.max(0, y - 5), img.height - 10),
-//       10,
-//       10,
-//       0,
-//       0,
-//       300,
-//       300,
-//     );
-//   };
