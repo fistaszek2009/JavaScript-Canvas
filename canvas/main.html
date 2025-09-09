@@ -16,7 +16,7 @@
         background-color: #222; 
         color: white;
         height: 100vh;
-        overflow: hidden;
+        font-size: 0;
     }
     
     h1 { 
@@ -65,8 +65,9 @@
 
     .project-btn.selected{
         background-color: #ededed;
-        transform: scale(0.95);
-        box-shadow: 0 0 8px 0 #ff6767;
+        transform: scale(0.98);
+        box-shadow: 0 0 12px 0 #ff0000;
+        color:#888;
     }
     
     #viewer-container {
@@ -149,35 +150,41 @@
         align-items: center;
     }
 
-    @media screen and (max-width: 800px) {
-        main {
-            display: flex !important;
-            flex-direction: column;
+    @media screen and (max-width: 1300px) {
+        main{
+            grid-template-columns: 1fr;
+            grid-template-rows: 71px 1fr;
         }
-        
-        #menu {
+        nav{
+            width:100vw;
+            display: flex;
+            flex-direction: row;
+            height:min-content;
+            border-right: none;
+        }
+        body nav #menu{
+            display: flex;
             flex-direction: row !important;
-            padding: 10px 20px;
-            gap: 8px;
+            flex-wrap: nowrap;
             overflow-x: auto;
-            flex-shrink: 0;
+            overflow-y: hidden;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 8px 10px;
+            scrollbar-width: thin;
         }
-        
-        .project-btn {
-            flex-shrink: 0;
-            font-size: 14px;
-            padding: 8px 16px;
-        }
-
-        #viewer-container {
-            flex: 1;
-            min-height: 0;
+        nav h1{
+            font-size: 20px;
+            margin:15px 8px 10px;
         }
     }
 
-    /* Scrollbar styling */
+    @media screen and (max-width: 1000px){
+        nav h1{display: none;}
+    }
+
     #menu::-webkit-scrollbar {
-        width: 6px;
+        width: 5px;
     }
 
     #menu::-webkit-scrollbar-track {
@@ -261,7 +268,6 @@
     });
 
     const openButtons = document.querySelectorAll('.project-btn')
-    console.log(openButtons)
 
     function toggleFullscreen() {
         if (isFullscreen) {
@@ -298,10 +304,6 @@
             exitFullscreen();
         }
     });
-
 </script>
-
 </body>
 </html>
-
-//locale storage
