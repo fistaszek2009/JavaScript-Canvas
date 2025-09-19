@@ -1,7 +1,7 @@
 <center><h1>Canvas – JS Mini Projects</h1></center>
 
 <p align="center">
-  <img src="main_view2.png" alt="Project preview 1" width="800"/>
+  <img src="images/main_view2.png" alt="Project preview 1" width="800"/>
 </p>
 
 
@@ -29,17 +29,17 @@ I followed the tutorial but extended the exercises, making them more **advanced 
 
 ## Exercises Overview
 
-| # | Project Name                                    | Description |
-|---|-------------------------------------------------|-------------|
-| 1 | [Ball Animation](ball-animation/index.html)     | - |
-| 2 | [Clock](clock/index.html)                       | - |
-| 3 | [Green Screen](green-screen/index.html)         | - |
-| 4 | [Looping Panorama](looping-panorama/index.html) | - |
-| 5 | [Mouse Circle](mouse-circle/index.html)         | - |
-| 6 | [Color Picker](color-picker/index.html)         | - |
-| 7 | [Solar System](solar-system/index.html)         | - |
-| 8 | [Painting Pixels](painting-pixels/index.html)   | - |
-| 9 | [Zooming Image](zooming-image/index.html)       | - |
+| # | Project Name                                    | Description                                                |
+|---|-------------------------------------------------|------------------------------------------------------------|
+| 1 | [Ball Animation](ball-animation/index.html)     | Animations of a ball bouncing in the box.                  |
+| 2 | [Clock](clock/index.html)                       | A clock with a few additional options.                     |
+| 3 | [Green Screen](green-screen/index.html)         | Chroma key effect with video.                              |
+| 4 | [Looping Panorama](looping-panorama/index.html) | Infinitly looping panorama, possible to scroll across.     |
+| 5 | [Mouse Circle](mouse-circle/index.html)         | Particles running on a circle (inspired by Jack Rugile).   |
+| 6 | [Color Picker](color-picker/index.html)         | Selects RGB code of the color from the pixel of the image. |
+| 7 | [Solar System](solar-system/index.html)         | Solar system interactive simulation.                       |
+| 8 | [Painting Pixels](painting-pixels/index.html)   | Greyscale, sepia and other effects made with canvas.       |
+| 9 | [Zooming Image](zooming-image/index.html)       | Element shows zoomed image - one smoothed and another not.|
 
 
 ## Licenses
