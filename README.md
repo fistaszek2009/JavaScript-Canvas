@@ -1,4 +1,4 @@
-<div align="center"><h1>Canvas – JS Mini Projects</h1></div>
+<center><h1>Canvas – JS Mini Projects</h1></center>
 
 <p align="center">
   <img src="images/main_view2.png" alt="Project preview 1" width="800"/>
